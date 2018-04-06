@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var 🍅: UILabel!
+    @IBOutlet weak var SendButton: UIButton!
+
     var amazing = false;
     
     override func viewDidLoad() {
@@ -22,8 +24,47 @@ class ViewController: UIViewController {
  
     }
 
+    var buttonPressed = 0
+
     @IBAction func makeAmazing(_ sender: Any) {
         🍅.textColor = .red;
+        
+        if buttonPressed == 0 {
+            SendButton.setTitleColor(UIColor.red, for: UIControlState.normal)
+            SendButton.setTitle("SENT!", for: UIControlState.normal)
+            buttonPressed = 1
+        } else {            
+            SendButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
+            SendButton.setTitle("Press to send to broLAD!", for: UIControlState.normal)
+            buttonPressed = 0
+        }
+        
+        let messageToSend = InfoLabel?.text ?? ""
+        
+        sendToLads(message: messageToSend);
+
+    }
+    
+        
+    func sendToLads(message: String){
+        print(message)
+        let whatsappURL = URL(string: "whatsapp://send?text=Hello%2C%20World!");
+
+        if (UIApplication.shared.canOpenURL(whatsappURL!)){
+            UIApplication.shared.open(whatsappURL!,
+                                      options: [:],
+                                      completionHandler: nil)
+
+        }
+        else{
+            displayMessage(message: "no whatsapp installed")
+        }
+    }
+    
+    
+    
+    func displayMessage(message: String){
+        🍅.text = message;
     }
     
     //Bonus:
