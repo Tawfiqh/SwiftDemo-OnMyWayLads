@@ -39,7 +39,7 @@ class ViewController: UIViewController {
             buttonPressed = 0
         }
         
-        let messageToSend = InfoLabel?.text ?? ""
+        let messageToSend = 🍅?.text ?? ""
         
         sendToLads(message: messageToSend);
 
